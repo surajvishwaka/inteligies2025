@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <style>
+            * {
+                box-sizing: border-box;
+                -webkit-tap-highlight-color: transparent;
+            }
+
+            .cX12aQ img {
+                max-width: 100%;
+                height: auto;
+            }
+
+            .cX12aQ {
+                position: relative;
+                width: 90%;
+                max-width: 768px;
+                margin: 2em auto;
+            }
+
+            @media (max-width: 768px) {
+                .cX12aQ {
+                    width: 95%;
+                    margin: 1em auto;
+                }
+            }
+            .cX12aQ img {
+                display: block;
+            }
+
+            .rL8zT9 {
+                position: absolute;
+                bottom: 0;
+                right: 0;
+                color: #fff;
+                padding: 1em;
+                opacity: 0;
+                transform: translateY(20px);
+                transition: transform 0.3s 0.7s, opacity 0.3s 0.7s;
+            }
+            .rL8zT9.hD3kF2 {
+                visibility: hidden;
+            }
+            .vZ7mB4 .rL8zT9 {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+            .aF9nC7 {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 0;
+                height: 100%;
+                overflow: hidden;
+                background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/148866/img-modified.jpg")
+                    no-repeat left top;
+                background-size: auto 100%;
+                transform: translateZ(0);
+                backface-visibility: hidden;
+            }
+            .aF9nC7 .rL8zT9 {
+                right: auto;
+                left: 0;
+            }
+            .vZ7mB4 .aF9nC7 {
+                width: 50%;
+                animation: nK2fR5 0.7s;
+            }
+
+            @keyframes nK2fR5 {
+                0% {
+                    width: 0;
+                }
+                60% {
+                    width: 55%;
+                }
+                100% {
+                    width: 50%;
+                }
+            }
+
+            .pQ6sV8 {
+                position: absolute;
+                height: 44px;
+                width: 44px;
+                left: 50%;
+                top: 50%;
+                margin-left: -22px;
+                margin-top: -22px;
+                border-radius: 50%;
+                background: #dc717d
+                    url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/148866/cd-arrows.svg")
+                    no-repeat center center;
+                cursor: move;
+                cursor: -webkit-grab;
+                cursor: grab;
+                opacity: 0;
+                transform: scale(0);
+                touch-action: none;
+            }
+
+            @media (max-width: 480px) {
+                .pQ6sV8 {
+                    height: 34px;
+                    width: 34px;
+                    margin-left: -17px;
+                    margin-top: -17px;
+                }
+            }
+            .pQ6sV8.draggable {
+                background-color: #445b7c;
+            }
+            .vZ7mB4 .pQ6sV8 {
+                opacity: 1;
+                transform: scale(1);
+                transition: transform 0.3s 0.7s, opacity 0s 0.7s;
+            }
+        </style>
+    </head>
+    <body>
+        <figure class="cX12aQ">
+            <img
+                src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/148866/img-original.jpg"
+                alt="Original Image"
+            />
+            <span class="rL8zT9" data-type="original">Original</span>
+
+            <div class="aF9nC7">
+                <span class="rL8zT9" data-type="modified">Modified</span>
+            </div>
+
+            <span class="pQ6sV8"></span>
+        </figure>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        <script>
+            jQuery(document).ready(function ($) {
+                checkPosition($(".cX12aQ"));
+                $(window).on("scroll", function () {
+                    checkPosition($(".cX12aQ"));
+                });
+
+                drags(
+                    $(".pQ6sV8"),
+                    $(".aF9nC7"),
+                    $(".cX12aQ"),
+                    $('.rL8zT9[data-type="original"]'),
+                    $('.rL8zT9[data-type="modified"]')
+                );
+
+                $(window).on("resize", function () {
+                    updateLabel(
+                        $('.rL8zT9[data-type="modified"]'),
+                        $(".aF9nC7"),
+                        "left"
+                    );
+                    updateLabel(
+                        $('.rL8zT9[data-type="original"]'),
+                        $(".aF9nC7"),
+                        "right"
+                    );
+                });
+            });
+
+            function checkPosition(container) {
+                if (
+                    $(window).scrollTop() + $(window).height() * 0.5 >
+                    container.offset().top
+                ) {
+                    container.addClass("vZ7mB4");
+                }
+            }
+
+            function drags(
+                dragElement,
+                resizeElement,
+                container,
+                labelContainer,
+                labelResizeElement
+            ) {
+                function handleDragStart(e) {
+                    e.preventDefault();
+                    dragElement.addClass("draggable");
+                    resizeElement.addClass("resizable");
+
+                    var dragWidth = dragElement.outerWidth();
+                    var containerOffset = container.offset().left;
+                    var containerWidth = container.outerWidth();
+                    var minLeft = containerOffset + 10;
+                    var maxLeft =
+                        containerOffset + containerWidth - dragWidth - 10;
+
+                    // Get the correct position based on event type
+                    var pageX = e.type.includes("mouse")
+                        ? e.pageX
+                        : e.touches[0].pageX;
+                    var xPosition =
+                        dragElement.offset().left + dragWidth - pageX;
+
+                    function handleDragMove(e) {
+                        e.preventDefault();
+                        // Get the correct position based on event type
+                        var currentX = e.type.includes("mouse")
+                            ? e.pageX
+                            : e.touches[0].pageX;
+                        var leftValue = currentX + xPosition - dragWidth;
+
+                        if (leftValue < minLeft) {
+                            leftValue = minLeft;
+                        } else if (leftValue > maxLeft) {
+                            leftValue = maxLeft;
+                        }
+
+                        var widthValue =
+                            ((leftValue + dragWidth / 2 - containerOffset) *
+                                100) /
+                                containerWidth +
+                            "%";
+
+                        $(".draggable").css("left", widthValue);
+                        $(".resizable").css("width", widthValue);
+
+                        updateLabel(labelResizeElement, resizeElement, "left");
+                        updateLabel(labelContainer, resizeElement, "right");
+                    }
+
+                    function handleDragEnd(e) {
+                        dragElement.removeClass("draggable");
+                        resizeElement.removeClass("resizable");
+
+                        // Remove all event listeners
+                        $(document).off("mousemove touchmove", handleDragMove);
+                        $(document).off("mouseup touchend", handleDragEnd);
+                    }
+
+                    // Add event listeners for both mouse and touch events
+                    $(document).on("mousemove touchmove", handleDragMove);
+                    $(document).on("mouseup touchend", handleDragEnd);
+                }
+
+                // Add event listeners for both mouse and touch events
+                dragElement.on("mousedown touchstart", handleDragStart);
+            }
+
+            function updateLabel(label, resizeElement, position) {
+                if (position == "left") {
+                    label.offset().left + label.outerWidth() <
+                    resizeElement.offset().left + resizeElement.outerWidth()
+                        ? label.removeClass("hD3kF2")
+                        : label.addClass("hD3kF2");
+                } else {
+                    label.offset().left >
+                    resizeElement.offset().left + resizeElement.outerWidth()
+                        ? label.removeClass("hD3kF2")
+                        : label.addClass("hD3kF2");
+                }
+            }
+        </script>
+    </body>
+</html>

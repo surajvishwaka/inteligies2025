@@ -1,0 +1,335 @@
+:root {
+    --accent11: #ff3b30; /* Apple red */
+    --txt11: #111;
+    --muted11: #666;
+    --border11: #ccc;
+    --bg11: #fff;
+}
+
+.gdbg {
+    background: linear-gradient(90deg, #b4c9f6 0%, #e6f4ff 100%);
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+}
+
+.gdbg h1 {
+    font-family: var(--title-font);
+    text-align: left;
+}
+
+.gdbg p {
+    text-align: left;
+    font-family: var(--body-font);
+    font-size: 20px;
+    line-height: 30px;
+    font-weight: 400;
+}
+
+@media screen and (max-width: 768px) {
+    .gdbg {
+        padding: 2rem 0;
+    }
+
+    .gdbg .row {
+        flex-direction: column-reverse;
+    }
+
+    .gdbg .col {
+        width: 100%;
+        text-align: center;
+        padding: 1rem;
+    }
+
+    .gdbg h1 {
+        font-size: 32px;
+        text-align: center;
+        padding-top: 1rem;
+    }
+
+    .gdbg p {
+        font-size: 18px;
+        line-height: 28px;
+        text-align: center;
+        padding-bottom: 1rem;
+    }
+
+    .gdbg img {
+        max-width: 80%;
+        margin: 0 auto;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .gdbg h1 {
+        font-size: 28px;
+    }
+
+    .gdbg p {
+        font-size: 16px;
+        line-height: 24px;
+    }
+
+    .gdbg img {
+        max-width: 90%;
+    }
+}
+
+/* 6 CARDS STYLE */
+
+.card3211 {
+    border: none;
+    text-align: center;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
+}
+
+.card3211 img {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 1rem;
+}
+
+.card3211 .card-body {
+    padding: 2.5rem;
+}
+
+.card3211 .card-title {
+    font-family: var(--title-font);
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #1d1d1f;
+    margin-bottom: 1rem;
+}
+
+.card3211 p {
+    font-family: var(--body-font);
+    font-size: 1.1rem;
+    color: #86868b;
+    margin-bottom: 1.5rem;
+}
+
+.card3211 button {
+    background-color: #1d1d1f;
+    color: #ffffff;
+    border: none;
+    padding: 12px 28px;
+    border-radius: 30px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: var(--body-font);
+}
+
+.card3211 button:hover {
+    background-color: #333;
+    transform: translateY(-2px);
+}
+
+.card-body11 {
+    background-image: url(images/email.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 506px;
+    width: 100%;
+}
+
+.card-body33 {
+    background-image: url(images/map.jpeg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 506px;
+    width: 100%;
+}
+
+.card-body22 {
+    background-image: url(images/call.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 506px;
+    width: 100%;
+}
+
+.rnd11 {
+    border: 2px solid #1d1d1f;
+    border-radius: 50%;
+    height: 60px;
+    width: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    transition: all 0.3s ease;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.card3211:hover .rnd11 {
+    background-color: #1d1d1f;
+    border-color: #1d1d1f;
+}
+
+.card3211:hover .rnd11 i {
+    color: #ffffff;
+}
+
+.rnd11 i {
+    font-size: 1.5rem;
+    color: #1d1d1f;
+    transition: color 0.3s ease;
+}
+
+@media (max-width: 768px) {
+    .card3211 {
+        margin-bottom: 1.5rem;
+    }
+
+    .card3211 .card-body {
+        padding: 2rem;
+    }
+
+    .card3211 .card-title {
+        font-size: 1.3rem;
+    }
+
+    .card3211 p {
+        font-size: 1rem;
+    }
+}
+
+/* ================= CONTACT FORM ================= */
+
+.contact-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 100px 0px;
+}
+
+form {
+    width: 1120px;
+    display: grid;
+    gap: 20px;
+}
+
+.form-row {
+    display: grid;
+    gap: 20px;
+}
+
+@media (min-width: 768px) {
+    .form-row {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    #contactForm{
+        padding: 0 20px;
+    }
+}
+
+.form-group {
+    position: relative;
+}
+
+input,
+select,
+textarea {
+    width: 100%;
+    padding: 14px 12px;
+    border: none;
+    border-bottom: 1px solid var(--border11);
+    font-size: 16px;
+    background: transparent;
+    outline: none;
+    color: var(--txt11);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Focus state */
+input:focus,
+select:focus,
+textarea:focus {
+    border-color: var(--accent11);
+}
+
+/* Error state only */
+input.invalid,
+select.invalid,
+textarea.invalid {
+    border-color: var(--accent11);
+    box-shadow: 0 0.8px 0 0 var(--accent11);
+}
+
+label {
+    position: absolute;
+    left: 12px;
+    top: 14px;
+    color: var(--muted11);
+    font-size: 18px;
+    pointer-events: none;
+    transition: 0.2s ease;
+}
+
+input:focus + label,
+input:not(:placeholder-shown) + label,
+select:focus + label,
+select:not([value=""]) + label,
+textarea:focus + label,
+textarea:not(:placeholder-shown) + label {
+    top: -6px;
+    font-size: 12px;
+    color: var(--accent11);
+    background: var(--bg11);
+    padding: 0 4px;
+}
+
+.error {
+    color: #ff3b30;
+    font-size: 13px;
+    margin-top: 4px;
+    display: none;
+}
+
+/* Custom select styling */
+select {
+    appearance: none;
+    background: transparent
+        url("data:image/svg+xml;utf8,<svg fill='%23666' height='20' viewBox='0 0 24 24' width='20' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>")
+        no-repeat right 12px center;
+    background-size: 16px;
+    padding-right: 36px;
+    cursor: pointer;
+}
+
+#frmbtn1 {
+    background: var(--accent11);
+    color: white;
+    border: none;
+    padding: 14px 28px;
+    font-size: 15px;
+    font-weight: 600;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.2s ease;
+    /* box-shadow: 0 8px 20px rgba(255, 59, 48, 0.3); */
+}
+
+#frmbtn1:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+#frmbtn1:hover:not(:disabled) {
+    background: #000000ff;
+}
